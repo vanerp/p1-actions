@@ -64,6 +64,8 @@ runs:
         file: ${{ inputs.folder }}/Dockerfile
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+        build-args:
+          - BUILD_FOLDER=${{ inputs.folder }}
     - name: Cleanup the binaries
       run: make BUILD_PATH=${{ inputs.folder }} clean_build 
       shell: bash
