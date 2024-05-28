@@ -37,7 +37,9 @@ runs:
     - name: Test with the Go CLI
       run: go test ./${{ inputs.folder }}/...
       shell: bash
-
+    - name: Build the binaries
+      run: make BUILD_PATH=${{ inputs.folder }} linux 
+      shell: bash
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
     - name: Set up Docker Buildx
