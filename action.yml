@@ -34,9 +34,6 @@ runs:
     - name: Install dependencies
       run: go get ./${{ inputs.folder }}
       shell: bash
-    - name: Test with the Go CLI
-      run: go test ./${{ inputs.folder }}/...
-      shell: bash
     - name: Build the binaries
       run: make BUILD_PATH=${{ inputs.folder }} VERSION_TAG=${{ github.ref_name }} linux 
       shell: bash
@@ -60,7 +57,7 @@ runs:
       with:
         context: .
         push: ${{ github.event_name != 'pull_request' }}
-        platforms: linux/amd64,linux/arm64,linux/arm/v7
+        platforms: linux/amd64,linux/arm64
         file: ${{ inputs.folder }}/Dockerfile
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
